@@ -25,6 +25,26 @@ defmodule Histogram do
   end
 end
 
+defmodule LoopAnagrams do
+  # Based on solutions presented here:
+  # http://selfexplanatorycode.blogspot.com/2008/09/results.html
+  # This is too slow for my word list:
+  # (* 123592 123592 ) ==  15,274,982,464 comparisons
+  def of(word, vocab) do
+    root = String.to_charlist(word) |> Enum.sort()
+    words = String.split(vocab, [" ", "\n"], trim: true)
+    Enum.reduce(words, MapSet.new(), fn w1, set1 ->
+      Enum.reduce(words, set1, fn w2, acc ->
+        case root == Enum.sort(String.to_charlist(w1) ++
+                               String.to_charlist(w2)) do
+          true -> MapSet.put(acc, [w1, w2])
+          false -> acc
+        end
+      end)
+    end)
+  end
+end
+
 defmodule Anagrams do
   def of(word, vocab) do
     root = Histogram.new(word)
@@ -151,10 +171,26 @@ defmodule AnagramTests do
 
   test "it generates multiple 2-word anagrams for long word" do
     word_list = File.read!("/usr/share/dict/words")
-    pairs = Anagrams.of("documenting", word_list) |> IO.inspect()
+    pairs = Anagrams.of("documenting", word_list) # |> IO.inspect()
     target = Enum.sort(String.to_charlist("documenting"))
     Enum.each(pairs, fn [a,b] ->
       assert Enum.sort(String.to_charlist(a<>b)) == target
     end)
   end
+
+  # test "benchmark diff. approaches" do
+  #   word_list = File.read!("/usr/share/dict/words")
+  #   targets = ["on", "ant", "lead", "entry", "subset", "abalone", "hivemind"]
+  #   Enum.flat_map(targets, fn w -> benchmark(w, word_list) end)
+  #   |> IO.inspect()
+  # end
+
+  # defp benchmark(word, word_list) do
+  #   Enum.flat_map([Anagrams, AnagramViaPermutations],
+  #     fn mod ->
+  #       Enum.map(1..5, fn _ -> :timer.tc(fn -> mod.of(word, word_list) end) end)
+  #       |> Enum.map(&elem(&1, 0))
+  #       |> Enum.map(fn time -> {word, String.length(word), mod, time} end)
+  #     end)
+  # end
 end
