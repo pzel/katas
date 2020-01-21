@@ -16,15 +16,6 @@ for y=0,127 do
  field[y]=row
 end
   
-function _init()
- cls(7)
- for x=0,127 do
-  for y=0,127 do
-   --if(rnd()<0.0005) pset(x,y,7)
-  end
- end
-end
-
 function _draw()
  for y=0,127 do
   for x=0,127 do
