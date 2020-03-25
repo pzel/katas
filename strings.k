@@ -3,7 +3,6 @@
 bail:{`0:,/("\nFAILED:\n"; 5:x; "\nvs\n"; 5:y; "\n"); _exit 1}
 test:{[l;r] :[(5:l)_sm(5:r); `0:" ",$l ; bail [l;r]]}
 
-/ http://beyondloom.com/blog/strings.html
 / 0 Multiplicity
 mult:{+/(y=)' x}
 test[mult["fhqwhgads";"h"]; 2]
@@ -22,6 +21,13 @@ test[dupli "applause";  "ap"]
 test[dupli "foo"; ,"o"]
 test[dupli "baz";  ""]
 
+// 3 Sort yourself out
+s:{&/(x@<x) _sm (y@<y)}
+test[s["teapot";"toptea"]; 1]
+test[s["apple";"elap"]; 0]
+test[s["listen";"silent"]; 1]
+test[s["";""]; 1]
+test[s[," " ; ""]; 0]
 
 `0:"\nALL TESTS PASSED\n"
 _exit 0
