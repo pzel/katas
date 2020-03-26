@@ -37,6 +37,15 @@ test[flakes "aaabccddefffgg"; "be"]
 test[flakes ""; ()]
 test[flakes[,"a"]; ,"a"]
 
+// 5 Musical chairs
+mus:{y _in ((!#:x) !\:x)}
+test[mus["foobar";"barfoo"]; 1]
+test[mus["fboaro";"barfoo"]; 0]
+test[mus["abcde";"deabc"]; 1]
+test[mus[,"";,""]; 1]
+test[mus[,""; ,"b"]; 0]
+test[mus[,"a"; ,""]; 0]
+
 
 `0:"\nALL TESTS PASSED\n"
 _exit 0
