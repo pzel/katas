@@ -29,5 +29,14 @@ test[s["listen";"silent"]; 1]
 test[s["";""]; 1]
 test[s[," " ; ""]; 0]
 
+// 4 Precious snowflakes
+flakes:{groups:x[=x]; ,/groups[&1=#:'groups]}
+test[flakes "somewhat heterogenous"; "mwa rgnu"]
+test[flakes "abc"; "abc"]
+test[flakes "aaabccddefffgg"; "be"]
+test[flakes ""; ()]
+test[flakes[,"a"]; ,"a"]
+
+
 `0:"\nALL TESTS PASSED\n"
 _exit 0
