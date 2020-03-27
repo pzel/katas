@@ -1,8 +1,8 @@
 / http://beyondloom.com/blog/strings.html
 \e 2
 bail:{`0:,/("\nFAILED:\n"; 5:x; "\nvs\n"; 5:y; "\n"); _exit 1}
-test:{[l;r] :[(5:l)_sm(5:r); `0:" ",$l ; bail [l;r]]}
 
+test:{[l;r] :[(5:l)_sm(5:r); `0:"." ; bail [l;r]]}
 / 0 Multiplicity
 mult:{+/(y=)' x}
 test[mult["fhqwhgads";"h"]; 2]
@@ -46,6 +46,15 @@ test[mus[,"";,""]; 1]
 test[mus[,""; ,"b"]; 0]
 test[mus[,"a"; ,""]; 0]
 
+// 6. Size matters
+size:{[in]
+s:{(#:x),y,x}  /tag with length and initial pos y
+lengths:in s' !#:in
+:2_'lengths@<lengths
+}
+test[size ("bb";,"a"); (,"a";"bb")]
+test[size ("aa";,"b"); (,"b";"aa")]
+test[size ("books";"apple";"peanut";"aardvark";"melon";"pie"); ("pie";"books";"apple";"melon";"peanut";"aardvark")];
 
 `0:"\nALL TESTS PASSED\n"
 _exit 0
