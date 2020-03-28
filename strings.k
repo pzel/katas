@@ -64,5 +64,15 @@ test[popcon "CCCBBBAA"; "C"]
 test[popcon "CCCBBBBAA"; "B"]
 
 
+// 8. Reverse a sentence
+revs:{{x," ",y}/|:'" "\x}
+test[revs "a few words in a sentence"
+     "a wef sdrow ni a ecnetnes"]
+test[revs " "; ," "]
+test[revs "abc"; "cba"]
+test[revs "a b c"; "a b c"]
+test[revs "zoop"; "pooz"]
+test[revs "one two three four"; "eno owt eerht ruof"]
+
 `0:"\nALL TESTS PASSED\n"
 _exit 0
