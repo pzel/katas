@@ -56,5 +56,13 @@ test[size ("bb";,"a"); (,"a";"bb")]
 test[size ("aa";,"b"); (,"b";"aa")]
 test[size ("books";"apple";"peanut";"aardvark";"melon";"pie"); ("pie";"books";"apple";"melon";"peanut";"aardvark")];
 
+// 7. Popularity contest
+/popcon:{>#:'=x}
+popcon:{x[**(=x)@>#:'=x]}
+test[popcon "abcbbac"; "b"]
+test[popcon "CCCBBBAA"; "C"]
+test[popcon "CCCBBBBAA"; "B"]
+
+
 `0:"\nALL TESTS PASSED\n"
 _exit 0
