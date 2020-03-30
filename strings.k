@@ -2,6 +2,7 @@
 \e 2
 bail:{`0:,/("\nFAILED:\n"; 5:x; "\nvs\n"; 5:y; "\n"); _exit 1}
 test:{[l;r] :[(5:l)_sm(5:r); `0:"." ; bail [l;r]]}
+V:"AEIOUYaeiouy"
 
 / 0 Multiplicity
 mult:{+/(y=)' x}
@@ -81,14 +82,24 @@ test[comp["embiggener";0 0 1 1 1 1 0 0 1 1]; "bigger"]
 
 / 10. skipped
 
+
 / 11. C_ns_n_nts
-consonants:{,/{:[x _in "AEIOUYaeiouy"; ,"_"; x]}'x}
+consonants:{,/{:[x _in V; ,"_"; x]}'x}
 test[consonants ""; ()]
 test[consonants (,"a"); ,"_"]
 test[consonants ("abc"); "_bc"]
 test[consonants "FLAPJACKS"; "FL_PJ_CKS"]
-test[consonants "Several normal words"; "S_v_r_l n_rm_l w_rds"]
+test[consonants "Several normal words"
+                "S_v_r_l n_rm_l w_rds"]
 
+/ 12. Cnsnnts Rdx
+rdx:{_dv[consonants x; "_"]}
+test[rdx "ABC" ; "BC"]
+test[rdx "Several normal words"
+         "Svrl nrml wrds"]
+test[rdx "FLAPJACKS"; "FLPJCKS"]
+test[rdx "aaa"; ""]
+test[rdx "AAA"; ""]
 
 `0:"\nALL TESTS PASSED\n"
 _exit 0
