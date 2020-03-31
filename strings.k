@@ -2,7 +2,7 @@
 \e 2
 bail:{`0:,/("\nFAILED:\n"; 5:x; "\nvs\n"; 5:y; "\n"); _exit 1}
 test:{[l;r] :[(5:l)_sm(5:r); `0:"." ; bail [l;r]]}
-V:"AEIOUYaeiouy"
+
 
 / 0 Multiplicity
 mult:{+/(y=)' x}
@@ -84,7 +84,7 @@ test[comp["embiggener";0 0 1 1 1 1 0 0 1 1]; "bigger"]
 
 
 / 11. C_ns_n_nts
-consonants:{,/{:[x _in V; ,"_"; x]}'x}
+consonants:{[in],/{ :[x _in "AEIOUYaeiouy"; ,"_"; x]}'in}
 test[consonants ""; ()]
 test[consonants (,"a"); ,"_"]
 test[consonants ("abc"); "_bc"]
@@ -100,6 +100,16 @@ test[rdx "Several normal words"
 test[rdx "FLAPJACKS"; "FLPJCKS"]
 test[rdx "aaa"; ""]
 test[rdx "AAA"; ""]
+
+/ 13. Title redacted
+red:{_ssr[x;y;(#:y)#"X"]}
+test[red["a few words in a sentence";"words"]
+         "a few XXXXX in a sentence"]
+test[red["one fish two fish";"fish"]
+         "one XXXX two XXXX"]
+test[red["I don't give a care";"care"]
+         "I don't give a XXXX"]
+
 
 `0:"\nALL TESTS PASSED\n"
 _exit 0
