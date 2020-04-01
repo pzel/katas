@@ -110,6 +110,16 @@ test[red["one fish two fish";"fish"]
 test[red["I don't give a care";"care"]
          "I don't give a XXXX"]
 
+/ 14. It's more fun to permute
+perm:{
+ps:x[! (#x)##:x]
+uniques:{[s] (#:?s)=(#:x)}'?:'ps
+:ps[&uniques]
+}
+test[perm "xyz"
+  ("xyz"; "xzy"; "yxz"; "yzx"; "zxy"; "zyx")]
+test[perm "AB"; ("AB"; "BA")]
+
 
 `0:"\nALL TESTS PASSED\n"
 _exit 0
