@@ -8,4 +8,4 @@ elixir:
 	for f in *.exs; do elixir $$f; done
 
 k:
-	for f in *.k; do k $$f; done
+	set -e; for f in *.k; do k $$f; done
