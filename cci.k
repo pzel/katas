@@ -9,4 +9,13 @@ test[hasUnique "baca"; 0]
 test[hasUnique ""; 1]
 test[hasUnique "Aa"; 1]
 
+/ 1.2 is s1 a permutation of s2?
+isPermutation:{(x@<x) _sm (y@<y)}
+test[isPermutation["";""]; 1]
+test[isPermutation[""; ,"a"]; 0]
+test[isPermutation["aba";"baa"]; 1]
+test[isPermutation["abc";"abc"]; 1]
+test[isPermutation["aaaa";"aaaa"]; 1]
+test[isPermutation["aaab";"bbba"]; 0]
+
 _exit 0
