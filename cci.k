@@ -18,4 +18,16 @@ test[isPermutation["abc";"abc"]; 1]
 test[isPermutation["aaaa";"aaaa"]; 1]
 test[isPermutation["aaab";"bbba"]; 0]
 
+/ 1.3 todo
+
+
+/ 1.4 palindrome permutation
+isPP:{:[(#:x)!2; (#:?x)=(((#:x)%2)+1) ; (#:?x)=((#:x)%2)]}
+test[isPP "aac"; 1]
+test[isPP "aacc"; 1]
+test[isPP "aaccef"; 0]
+test[isPP "aaccefg"; 0]
+test[isPP ""; 1]
+test[isPP[,"a"]; 1]
+
 _exit 0
