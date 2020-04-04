@@ -30,4 +30,11 @@ test[isPP "aaccefg"; 0]
 test[isPP ""; 1]
 test[isPP[,"a"]; 1]
 
+/ 1.9 string rotation
+isRotation:{:[(#x)=#y; y _in (!#x)!\:x; 0]}
+test[isRotation["abc";"bca"]; 1]
+test[isRotation["erbottlewat";"waterbottle"]; 1]
+test[isRotation["abc";"bba"]; 0]
+test[isRotation["ab";"bba"]; 0]
+
 _exit 0
